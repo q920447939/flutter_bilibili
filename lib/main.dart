@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bilibili/http/core/hi_net.dart';
+import 'package:flutter_bilibili/http/dao/account/account_dao.dart';
+import 'package:flutter_bilibili/http/request/register_request.dart';
 import 'package:flutter_bilibili/http/request/test_request.dart';
 
 void main() {
@@ -61,6 +63,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String response = "";
 
+  //
+  TextEditingController userNameController = TextEditingController();
+
+  //密码的控制器
+  TextEditingController passController = TextEditingController();
+
   void _incrementCounter() async {
     var fire =
         await HiNet.getInstance().fire(TestRequest().add("requestPrams", "1"));
@@ -70,6 +78,16 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
+      response = jsonEncode(fire);
+    });
+  }
+
+  void register() async {
+    var userName = userNameController.text == "" ?? "123";
+    var password = passController.text == "" ?? "123";
+    var fire =
+        await AccountDao.register(userName.toString(), password.toString());
+    setState(() {
       response = jsonEncode(fire);
     });
   }
@@ -96,33 +114,35 @@ class _MyHomePageState extends State<MyHomePage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            TextField(
+              keyboardType: TextInputType.name,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.all(10.0),
+                icon: Icon(Icons.text_fields),
+                labelText: '用户名',
+              ),
+              //onChanged: _textFieldChanged,
+              controller: userNameController,
+              autofocus: false,
             ),
-            Text(
-              'response: $response',
-              style: TextStyle(fontSize: 10),
+            TextField(
+              keyboardType: TextInputType.visiblePassword,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.all(10.0),
+                icon: Icon(Icons.text_fields),
+                labelText: '密码',
+              ),
+              //onChanged: _textFieldChanged,
+              controller: passController,
+              autofocus: false,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: register,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

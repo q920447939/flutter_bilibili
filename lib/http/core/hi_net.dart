@@ -18,7 +18,7 @@ class HiNet {
     return _instance;
   }
 
-  Future fire(BaseRequest baseRequest) async {
+  Future<HiNetResponse> fire(BaseRequest baseRequest) async {
     HiNetResponse? response;
     try {
       response = await send(baseRequest);
@@ -29,10 +29,7 @@ class HiNet {
         log("occur system error $e");
       }
     }
-    if (response == null) {
-      return null;
-    }
-    int statusCode = response.statusCode!;
+    int statusCode = response!.statusCode!;
 
     switch (statusCode) {
       case 200:
