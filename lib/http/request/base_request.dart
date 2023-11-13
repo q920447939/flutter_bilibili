@@ -7,7 +7,7 @@ abstract class BaseRequest {
   var useHttps = true;
 
   String authority() {
-    return "bilibili.com";
+    return "api.devio.org";
   }
 
   HttpMethod method();

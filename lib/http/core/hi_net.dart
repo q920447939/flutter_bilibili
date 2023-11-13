@@ -1,6 +1,11 @@
 import 'dart:developer';
 
+import 'package:flutter_bilibili/http/core/dio_hi_net_adapter.dart';
+import 'package:flutter_bilibili/http/core/hi_net_response.dart';
+import 'package:flutter_bilibili/http/core/mock_hi_net_adapter.dart';
 import 'package:flutter_bilibili/http/request/base_request.dart';
+
+import 'hi_error.dart';
 
 class HiNet {
   static late HiNet _instance = HiNet._();
@@ -14,17 +19,36 @@ class HiNet {
   }
 
   Future fire(BaseRequest baseRequest) async {
-    var response = await send(baseRequest);
-    var data = response['data111'];
-    log("data is $data");
+    HiNetResponse? response;
+    try {
+      response = await send(baseRequest);
+    } catch (e) {
+      if (e is HiNetError) {
+        log("occur HinNet business error , code is ${e.code} , msg is ${e.msg}");
+      } else {
+        log("occur system error $e");
+      }
+    }
+    if (response == null) {
+      return null;
+    }
+    int statusCode = response.statusCode!;
+
+    switch (statusCode) {
+      case 200:
+        return response.data;
+      case 401:
+        throw NoLoginError();
+      case 403:
+        throw NeedAuthError();
+      default:
+        throw HiNetError(code: statusCode, msg: response.statusMessage ?? "");
+    }
   }
 
-  Future<dynamic> send<T>(BaseRequest baseRequest) async {
+  Future<HiNetResponse> send<T>(BaseRequest baseRequest) async {
     baseRequest.addHead("token", "111");
     baseRequest.add("param1", "value1");
-
-    return Future.value({
-      "data": "data",
-    });
+    return await DioHiNetAdapter().send(baseRequest);
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bilibili/http/core/hi_net.dart';
 import 'package:flutter_bilibili/http/request/test_request.dart';
@@ -57,17 +59,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  String response = "";
 
-  void _incrementCounter() {
-    HiNet.getInstance().fire(TestRequest());
+  void _incrementCounter() async {
+    var fire =
+        await HiNet.getInstance().fire(TestRequest().add("requestPrams", "1"));
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
+      response = jsonEncode(fire);
     });
   }
 
@@ -112,8 +115,8 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              'response: $response',
+              style: TextStyle(fontSize: 10),
             ),
           ],
         ),
