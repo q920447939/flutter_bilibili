@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bilibili/http/core/hi_net.dart';
 import 'package:flutter_bilibili/http/dao/account/account_dao.dart';
-import 'package:flutter_bilibili/http/request/register_request.dart';
 import 'package:flutter_bilibili/http/request/test_request.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -85,11 +86,20 @@ class _MyHomePageState extends State<MyHomePage> {
   void register() async {
     var userName = userNameController.text == "" ?? "123";
     var password = passController.text == "" ?? "123";
-    var fire =
-        await AccountDao.register(userName.toString(), password.toString());
     setState(() {
-      response = jsonEncode(fire);
+      response = "等待服务端返回";
     });
+    var result =
+        await AccountDao.register(userName.toString(), password.toString());
+    if (result.statusCode == 200) {
+      setState(() {
+        response = jsonEncode(result);
+      });
+    } else {
+      setState(() {
+        response = result.statusCode.toString();
+      });
+    }
   }
 
   @override
@@ -138,6 +148,10 @@ class _MyHomePageState extends State<MyHomePage> {
               controller: passController,
               autofocus: false,
             ),
+            Text(
+              response,
+              style: TextStyle(fontSize: 14, color: Colors.red),
+            )
           ],
         ),
       ),

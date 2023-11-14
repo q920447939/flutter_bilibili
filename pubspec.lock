@@ -53,10 +53,18 @@ packages:
     dependency: "direct dev"
     description:
       name: dio
-      sha256: "417e2a6f9d83ab396ec38ff4ea5da6c254da71e4db765ad737a42af6930140b7"
+      sha256: "7d328c4d898a61efc3cd93655a0955858e29a0aa647f0f9e02d59b3bb275e2e8"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.3.3"
+    version: "4.0.6"
+  dio_proxy_adapter:
+    dependency: "direct dev"
+    description:
+      name: dio_proxy_adapter
+      sha256: "00aca9e9445ddb422c4bb14abee0c17eaf58fe09017da42f9ed1c1b7c740cdc5"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -70,6 +78,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_dotenv:
+    dependency: "direct dev"
+    description:
+      name: flutter_dotenv
+      sha256: "9357883bdd153ab78cbf9ffa07656e336b8bbb2b5a3ca596b0b27e119f7c7d77"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "5.1.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -209,4 +225,4 @@ packages:
     source: hosted
     version: "0.1.4-beta"
 sdks:
-  dart: ">=3.1.2 <4.0.0"
+  dart: ">=3.1.1 <4.0.0"
