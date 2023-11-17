@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter_bilibili/http/core/dio_hi_net_adapter.dart';
 import 'package:flutter_bilibili/http/core/hi_net_response.dart';
-import 'package:flutter_bilibili/http/core/mock_hi_net_adapter.dart';
 import 'package:flutter_bilibili/http/request/base_request.dart';
 
 import 'hi_error.dart';
@@ -25,11 +24,17 @@ class HiNet {
     } catch (e) {
       if (e is HiNetError) {
         log("occur HinNet business error , code is ${e.code} , msg is ${e.msg}");
+        var hiNetResponse =
+            HiNetResponse(statusCode: e.code, statusMessage: e.msg);
+        return hiNetResponse;
       } else {
         log("occur system error $e");
+        var hiNetResponse =
+            HiNetResponse(statusCode: -1, statusMessage: e.toString());
+        return hiNetResponse;
       }
     }
-    int statusCode = response!.statusCode!;
+    int statusCode = response.statusCode!;
 
     switch (statusCode) {
       case 200:
