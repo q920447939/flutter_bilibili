@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-appBar(String leftTitle, String rightTitle, VoidCallback rightClick) {
+appBar(String leftTitle, String rightTitle, VoidCallback? rightClick) {
   return AppBar(
     centerTitle: false,
     titleSpacing: 0,

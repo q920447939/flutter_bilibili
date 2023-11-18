@@ -7,7 +7,9 @@ import '../widget/loading.dart';
 import '../widget/login_effect.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  VoidCallback? jumpToLogin;
+
+  RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -26,9 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar("注册", "登录", () {
-        print("123");
-      }),
+      appBar: appBar("注册", "登录", widget.jumpToLogin),
       body: Container(
         child: ListView(
           children: [
@@ -160,6 +160,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 onClose: () {
                   setState(() {
                     showLoading = false;
+                    if (null != widget.jumpToLogin) {
+                      widget.jumpToLogin!();
+                    }
                   });
                 },
                 duration: const Duration(seconds: 1),
