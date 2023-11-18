@@ -53,6 +53,7 @@ dev_dependencies:
   flutter_gen_runner: ^5.3.2  #asset目录下的内容，使用类常量去访问  ，如果加入了新的图片，需要在终端输入命令  dart run build_runner build
   flustars: ^2.0.1 #flutter工具类
   loading_animation_widget: ^1.2.0+4 #loading动画
+  fluttertoast: ^8.2.4 #APP内提示框
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

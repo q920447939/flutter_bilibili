@@ -6,6 +6,9 @@ import 'package:flutter_bilibili/http/core/hi_net.dart';
 import 'package:flutter_bilibili/http/page/register_page.dart';
 import 'package:flutter_bilibili/http/request/test_request.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+late FToast fToast;
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -44,7 +47,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    _initAsync();
+    fToast = FToast();
+    fToast.init(context);
+    //_showToast();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initAsync();
+    });
   }
 
   void _initAsync() async {
@@ -57,6 +65,44 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       response = jsonEncode(fire);
     });
+  }
+
+  _showToast() {
+    Widget toast = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: Colors.greenAccent,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.check),
+          SizedBox(
+            width: 12.0,
+          ),
+          Text("This is a Custom Toast"),
+        ],
+      ),
+    );
+
+    fToast.showToast(
+      child: toast,
+      gravity: ToastGravity.BOTTOM,
+      toastDuration: Duration(seconds: 2),
+    );
+
+    // Custom Toast Position
+    fToast.showToast(
+        child: toast,
+        toastDuration: Duration(seconds: 2),
+        positionedToastBuilder: (context, child) {
+          return Positioned(
+            child: child,
+            top: 16.0,
+            left: 16.0,
+          );
+        });
   }
 
   @override
