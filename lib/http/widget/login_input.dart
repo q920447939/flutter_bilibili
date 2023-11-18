@@ -66,7 +66,7 @@ class _LoginInputState extends State<LoginInput> {
           children: [
             Container(
               width: 100,
-              padding: EdgeInsets.only(left: 16, right: 10),
+              padding: EdgeInsets.only(left: 10, right: 10),
               child: Text(
                 widget.title,
                 style: TextStyle(fontSize: 16, decoration: TextDecoration.none),
@@ -76,7 +76,7 @@ class _LoginInputState extends State<LoginInput> {
           ],
         ),
         Padding(
-          padding: EdgeInsets.only(top: 5, left: 16, right: 10),
+          padding: EdgeInsets.only(top: 5, left: 10, right: 10),
           child: Divider(
             height: 1,
             thickness: 0.5,
