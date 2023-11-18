@@ -18,8 +18,20 @@ class $AssetImageGen {
 class $AssetImageLoginGen {
   const $AssetImageLoginGen();
 
+  $AssetImageLoginCenterGen get center => const $AssetImageLoginCenterGen();
   $AssetImageLoginCloseGen get close => const $AssetImageLoginCloseGen();
   $AssetImageLoginOpenGen get open => const $AssetImageLoginOpenGen();
+}
+
+class $AssetImageLoginCenterGen {
+  const $AssetImageLoginCenterGen();
+
+  /// File path: asset/image/login/center/bili_logo.png
+  AssetGenImage get biliLogo =>
+      const AssetGenImage('asset/image/login/center/bili_logo.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [biliLogo];
 }
 
 class $AssetImageLoginCloseGen {
