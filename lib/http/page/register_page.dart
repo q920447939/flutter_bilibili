@@ -5,6 +5,7 @@ import 'package:flutter_bilibili/http/widget/login_input.dart';
 import '../widget/appbar.dart';
 import '../widget/loading.dart';
 import '../widget/login_effect.dart';
+import '../widget/toast.dart';
 import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -173,6 +174,7 @@ class _RegisterPageState extends State<RegisterPage> {
               );
             },
           );
+          showSuccToast("注册成功");
         }
       },
       child: Ink(

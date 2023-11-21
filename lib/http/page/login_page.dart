@@ -2,6 +2,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bilibili/http/page/register_page.dart';
 import 'package:flutter_bilibili/http/widget/appbar.dart';
+import 'package:flutter_bilibili/http/widget/login_effect.dart';
 import 'package:flutter_bilibili/http/widget/login_input.dart';
 
 import '../widget/login_button.dart';
@@ -31,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
       }),
       body: ListView(
         children: [
+          LoginEffect(protect: protect),
           LoginInput(
             textInputType: TextInputType.text,
             title: '用户名',
@@ -84,9 +86,10 @@ class _LoginPageState extends State<LoginPage> {
   void _adjustAllowClickLogin() {
     print("_username is $_username");
     if (ObjectUtil.isNotEmpty(_username) && ObjectUtil.isNotEmpty(_password)) {
-      setState(() {
-        allowClickLogin = true;
-      });
+      allowClickLogin = true;
+    } else {
+      allowClickLogin = false;
     }
+    setState(() {});
   }
 }

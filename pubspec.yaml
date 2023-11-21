@@ -55,6 +55,7 @@ dev_dependencies:
   loading_animation_widget: ^1.2.0+4 #loading动画
   fluttertoast: ^8.2.4 #APP内提示框
 
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
