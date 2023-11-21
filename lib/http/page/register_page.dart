@@ -5,11 +5,12 @@ import 'package:flutter_bilibili/http/widget/login_input.dart';
 import '../widget/appbar.dart';
 import '../widget/loading.dart';
 import '../widget/login_effect.dart';
+import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   VoidCallback? jumpToLogin;
 
-  RegisterPage({super.key});
+  RegisterPage({super.key, this.jumpToLogin});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -28,7 +29,10 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar("注册", "登录", widget.jumpToLogin),
+      appBar: appBar("注册", "登录", () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
+      }),
       body: Container(
         child: ListView(
           children: [
