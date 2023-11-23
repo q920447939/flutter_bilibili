@@ -12,7 +12,22 @@ import 'package:flutter/widgets.dart';
 class $AssetImageGen {
   const $AssetImageGen();
 
+  $AssetImageIcosGen get icos => const $AssetImageIcosGen();
   $AssetImageLoginGen get login => const $AssetImageLoginGen();
+}
+
+class $AssetImageIcosGen {
+  const $AssetImageIcosGen();
+
+  /// File path: asset/image/icos/login.png
+  AssetGenImage get login => const AssetGenImage('asset/image/icos/login.png');
+
+  /// File path: asset/image/icos/register.png
+  AssetGenImage get register =>
+      const AssetGenImage('asset/image/icos/register.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [login, register];
 }
 
 class $AssetImageLoginGen {
