@@ -80,6 +80,7 @@ flutter:
      - asset/image/login/center/bili_logo.png
      - asset/image/icos/register.png
      - asset/image/icos/login.png
+     - asset/image/background/grey.png
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

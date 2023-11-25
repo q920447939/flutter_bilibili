@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../bar_manager/buttom_navigate_bar_manager.dart';
+import '../gen/assets.gen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,11 +18,18 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('首页'),
+        backgroundColor: Colors.white,
       ),
       body: Center(
-        child: Text("首页"),
+        child: Column(
+          children: [
+            _buildTop(),
+          ],
+        ),
       ),
       bottomNavigationBar: ConvexAppBar(
+          color: Colors.white,
+          backgroundColor: Colors.red[300],
           onTap: (int index) {
             var routPath = targetRouter(index);
             print("routPath:$routPath");
@@ -35,4 +43,39 @@ class _HomePageState extends State<HomePage> {
           ]),
     );
   }
+
+  _buildTop() {
+    return Row(
+      children: [
+        _buildTopLeft(),
+        //_buildTopCenter(),
+        //_buildTopRight(),
+      ],
+    );
+  }
+
+  _buildTopLeft() {
+    return Stack(
+      children: [
+        Container(
+          width: 40,
+          height: 40,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            image: DecorationImage(
+                image: AssetImage(Assets.image.background.grey.path),
+                fit: BoxFit.fill),
+          ),
+          child: Image(
+            image: AssetImage(Assets.image.icos.login.path),
+          ),
+        )
+      ],
+    );
+  }
+
+  _buildTopCenter() {}
+
+  _buildTopRight() {}
 }

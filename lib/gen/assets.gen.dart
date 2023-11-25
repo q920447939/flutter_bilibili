@@ -12,8 +12,20 @@ import 'package:flutter/widgets.dart';
 class $AssetImageGen {
   const $AssetImageGen();
 
+  $AssetImageBackgroundGen get background => const $AssetImageBackgroundGen();
   $AssetImageIcosGen get icos => const $AssetImageIcosGen();
   $AssetImageLoginGen get login => const $AssetImageLoginGen();
+}
+
+class $AssetImageBackgroundGen {
+  const $AssetImageBackgroundGen();
+
+  /// File path: asset/image/background/grey.png
+  AssetGenImage get grey =>
+      const AssetGenImage('asset/image/background/grey.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [grey];
 }
 
 class $AssetImageIcosGen {
