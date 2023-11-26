@@ -13,6 +13,7 @@ class $AssetImageGen {
   const $AssetImageGen();
 
   $AssetImageBackgroundGen get background => const $AssetImageBackgroundGen();
+  $AssetImageHomeGen get home => const $AssetImageHomeGen();
   $AssetImageIcosGen get icos => const $AssetImageIcosGen();
   $AssetImageLoginGen get login => const $AssetImageLoginGen();
 }
@@ -26,6 +27,28 @@ class $AssetImageBackgroundGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [grey];
+}
+
+class $AssetImageHomeGen {
+  const $AssetImageHomeGen();
+
+  /// File path: asset/image/home/TVMan.png
+  AssetGenImage get tVMan => const AssetGenImage('asset/image/home/TVMan.png');
+
+  /// File path: asset/image/home/battery.png
+  AssetGenImage get battery =>
+      const AssetGenImage('asset/image/home/battery.png');
+
+  /// File path: asset/image/home/envolope.png
+  AssetGenImage get envolope =>
+      const AssetGenImage('asset/image/home/envolope.png');
+
+  /// File path: asset/image/home/gamepad.png
+  AssetGenImage get gamepad =>
+      const AssetGenImage('asset/image/home/gamepad.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [tVMan, battery, envolope, gamepad];
 }
 
 class $AssetImageIcosGen {

@@ -94,7 +94,10 @@ class _LoginInputState extends State<LoginInput> {
       focusNode: _focusNode,
       obscureText: widget.isObscureText,
       style: TextStyle(
-          fontSize: 16, color: Colors.black54, fontWeight: FontWeight.w300),
+        fontSize: 16,
+        color: Colors.black54,
+        fontWeight: FontWeight.w300,
+      ),
       decoration: InputDecoration(
           hintText: widget.hintText,
           hintStyle: widget.hintStyle,
