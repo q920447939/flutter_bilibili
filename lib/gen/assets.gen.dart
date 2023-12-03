@@ -35,9 +35,20 @@ class $AssetImageHomeGen {
   /// File path: asset/image/home/TVMan.png
   AssetGenImage get tVMan => const AssetGenImage('asset/image/home/TVMan.png');
 
+  /// File path: asset/image/home/barrage_open.png
+  AssetGenImage get barrageOpen =>
+      const AssetGenImage('asset/image/home/barrage_open.png');
+
   /// File path: asset/image/home/battery.png
   AssetGenImage get battery =>
       const AssetGenImage('asset/image/home/battery.png');
+
+  $AssetImageHomeButtomNavigateGen get buttomNavigate =>
+      const $AssetImageHomeButtomNavigateGen();
+
+  /// File path: asset/image/home/enlarge.png
+  AssetGenImage get enlarge =>
+      const AssetGenImage('asset/image/home/enlarge.png');
 
   /// File path: asset/image/home/envolope.png
   AssetGenImage get envolope =>
@@ -47,8 +58,35 @@ class $AssetImageHomeGen {
   AssetGenImage get gamepad =>
       const AssetGenImage('asset/image/home/gamepad.png');
 
+  /// File path: asset/image/home/likesong.png
+  AssetGenImage get likesong =>
+      const AssetGenImage('asset/image/home/likesong.png');
+
+  /// File path: asset/image/home/mute_sound.png
+  AssetGenImage get muteSound =>
+      const AssetGenImage('asset/image/home/mute_sound.png');
+
+  /// File path: asset/image/home/tab_bar_big_video.png
+  AssetGenImage get tabBarBigVideo =>
+      const AssetGenImage('asset/image/home/tab_bar_big_video.png');
+
+  /// File path: asset/image/home/tab_bar_more_info.png
+  AssetGenImage get tabBarMoreInfo =>
+      const AssetGenImage('asset/image/home/tab_bar_more_info.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [tVMan, battery, envolope, gamepad];
+  List<AssetGenImage> get values => [
+        tVMan,
+        barrageOpen,
+        battery,
+        enlarge,
+        envolope,
+        gamepad,
+        likesong,
+        muteSound,
+        tabBarBigVideo,
+        tabBarMoreInfo
+      ];
 }
 
 class $AssetImageIcosGen {
@@ -71,6 +109,29 @@ class $AssetImageLoginGen {
   $AssetImageLoginCenterGen get center => const $AssetImageLoginCenterGen();
   $AssetImageLoginCloseGen get close => const $AssetImageLoginCloseGen();
   $AssetImageLoginOpenGen get open => const $AssetImageLoginOpenGen();
+}
+
+class $AssetImageHomeButtomNavigateGen {
+  const $AssetImageHomeButtomNavigateGen();
+
+  /// File path: asset/image/home/buttom_navigate/dynamic.png
+  AssetGenImage get dynamic =>
+      const AssetGenImage('asset/image/home/buttom_navigate/dynamic.png');
+
+  /// File path: asset/image/home/buttom_navigate/home.png
+  AssetGenImage get home =>
+      const AssetGenImage('asset/image/home/buttom_navigate/home.png');
+
+  /// File path: asset/image/home/buttom_navigate/my.png
+  AssetGenImage get my =>
+      const AssetGenImage('asset/image/home/buttom_navigate/my.png');
+
+  /// File path: asset/image/home/buttom_navigate/shop_car.png
+  AssetGenImage get shopCar =>
+      const AssetGenImage('asset/image/home/buttom_navigate/shop_car.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [dynamic, home, my, shopCar];
 }
 
 class $AssetImageLoginCenterGen {
