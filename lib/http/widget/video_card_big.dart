@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../gen/assets.gen.dart';
 
-class VideoCard extends StatefulWidget {
+class VideoCardBig extends StatefulWidget {
   final double height;
   final double? width;
   final String videoTitle;
@@ -12,7 +12,7 @@ class VideoCard extends StatefulWidget {
   final double aspectRatio;
   final double thumbUpNum;
 
-  VideoCard({
+  VideoCardBig({
     required this.height,
     required this.videoTitle,
     this.width = double.infinity,
@@ -23,10 +23,10 @@ class VideoCard extends StatefulWidget {
   });
 
   @override
-  State<VideoCard> createState() => _VideoCardState();
+  State<VideoCardBig> createState() => _VideoCardBigState();
 }
 
-class _VideoCardState extends State<VideoCard> {
+class _VideoCardBigState extends State<VideoCardBig> {
   @override
   Widget build(BuildContext context) {
     return Container(

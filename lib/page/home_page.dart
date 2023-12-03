@@ -1,10 +1,13 @@
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
-import 'package:flutter_bilibili/http/widget/video_card.dart';
+import 'package:flutter_bilibili/http/widget/video_card_big.dart';
 
 import '../gen/assets.gen.dart';
 import '../http/widget/bottom_navigation_bar.dart';
 import '../http/widget/scroll_tab_bar.dart';
+import 'package:flustars/flustars.dart';
+
+import '../http/widget/video_card_item.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -47,23 +50,22 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.only(top: 20),
-            child: Column(
-              children: [
-                _buildTop(),
-                _buildTabBar(),
-                VideoCard(
-                  height: 400,
-                  videoTitle: '一个真实的案例告诉你,人无聊起来能有多坏?',
-                  playNum: 395.4,
-                  collectNum: 102,
-                  thumbUpNum: 2,
-                ),
-                _buildVideoList(),
-              ],
-            ),
+        child: Padding(
+          padding: EdgeInsets.only(top: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildTop(),
+              _buildTabBar(),
+              VideoCardBig(
+                height: 284,
+                videoTitle: '一个真实的案例告诉你,人无聊起来能有多坏?',
+                playNum: 395.4,
+                collectNum: 102,
+                thumbUpNum: 2,
+              ),
+              _buildVideoList(),
+            ],
           ),
         ),
       ),
@@ -260,10 +262,36 @@ class _HomePageState extends State<HomePage>
   List<IconData> _icons = [];
 
   _buildVideoList() {
-    return Container(
-      width: 200,
-      height: 100,
-      color: Colors.red,
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.42,
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          // 每行三列
+          crossAxisCount: 2,
+          // 主轴间距
+          mainAxisSpacing: 4.0,
+          // 交叉轴间距
+          crossAxisSpacing: 4.0,
+        ),
+        // 构建子widget
+        itemBuilder: (context, index) {
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.transparent,
+              border: Border.all(color: Colors.black12, width: 0.8),
+            ),
+            child: VideoCardItem(
+              videoTitle: index.toString(),
+              height: 400,
+              width: 396,
+              playNum: 0,
+            ),
+          );
+        },
+        // 子widget数量
+        itemCount: 10,
+      ),
     );
   }
 

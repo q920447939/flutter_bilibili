@@ -74,6 +74,10 @@ class $AssetImageHomeGen {
   AssetGenImage get tabBarMoreInfo =>
       const AssetGenImage('asset/image/home/tab_bar_more_info.png');
 
+  /// File path: asset/image/home/tick_up.png
+  AssetGenImage get tickUp =>
+      const AssetGenImage('asset/image/home/tick_up.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         tVMan,
@@ -85,7 +89,8 @@ class $AssetImageHomeGen {
         likesong,
         muteSound,
         tabBarBigVideo,
-        tabBarMoreInfo
+        tabBarMoreInfo,
+        tickUp
       ];
 }
 

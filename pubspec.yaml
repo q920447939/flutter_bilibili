@@ -92,6 +92,7 @@ flutter:
      - asset/image/home/barrage_open.png
      - asset/image/home/enlarge.png
      - asset/image/home/mute_sound.png
+     - asset/image/home/tick_up.png
 
      - asset/image/home/buttom_navigate/dynamic.png
      - asset/image/home/buttom_navigate/home.png
