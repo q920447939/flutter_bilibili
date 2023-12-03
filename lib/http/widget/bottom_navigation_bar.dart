@@ -1,5 +1,6 @@
-import 'package:animated_bottom_navigation/animated_bottom_navigation.dart';
 import 'package:flutter/material.dart';
+
+import '../../gen/assets.gen.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   const CustomBottomNavigationBar({super.key});
@@ -10,6 +11,16 @@ class CustomBottomNavigationBar extends StatefulWidget {
 }
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+  int _bottomNavigationIndex = 3; //底部导航页的索引，从第一页开始（比如首页）
+
+  List _bottomNameList = [
+    "首页",
+    "动态",
+    "+",
+    "会员购",
+    "我的",
+  ];
+
   int currentIndex = 0;
 
   late List<Widget> widgets;
@@ -27,90 +38,78 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBottomNavigation(
-      context: context,
-      items: [
-        TabItem(
-          icon: const Icon(Icons.hive_sharp),
-          haveChildren: true,
-          activeColor: Colors.white,
-          inActiveColor: Colors.white60,
-          children: [
-            TabChildrenItem(
-              icon: const Icon(Icons.call),
-              title: 'Call',
-              onTap: () {},
-            ),
-            TabChildrenItem(
-              icon: const Icon(Icons.photo_rounded),
-              onTap: () {},
-              title: 'Gallery',
-            ),
-            TabChildrenItem(
-              icon: const Icon(Icons.add_road),
-              onTap: () {},
-            ),
-          ],
-        ),
-        TabItem(
-          icon: const Icon(Icons.library_add),
-          haveChildren: true,
-          activeColor: Colors.white,
-          inActiveColor: Colors.white60,
-          children: [
-            TabChildrenItem(
-              icon: const Icon(Icons.add_a_photo),
-              onTap: () {},
-            ),
-            TabChildrenItem(
-              icon: const Icon(Icons.get_app),
-              onTap: () {},
-            ),
-            TabChildrenItem(
-              icon: const Icon(Icons.settings),
-              onTap: () {},
-            ),
-          ],
-        ),
-        TabItem(
-          icon: const Icon(Icons.bookmark),
-          activeColor: Colors.white,
-          inActiveColor: Colors.white60,
-        ),
-        TabItem(
-          icon: const Icon(Icons.camera_alt_rounded),
-          haveChildren: true,
-          activeColor: Colors.white,
-          inActiveColor: Colors.white60,
-          children: [
-            TabChildrenItem(
-              icon: const Icon(Icons.timer_10_select_rounded),
-              onTap: () {},
-            ),
-            TabChildrenItem(
-              icon: const Icon(Icons.phone_iphone_rounded),
-              onTap: () {},
-            ),
-            TabChildrenItem(
-              icon: const Icon(Icons.alarm),
-              onTap: () {},
-            ),
-            TabChildrenItem(
-              icon: const Icon(Icons.color_lens),
-              onTap: () {},
-            ),
-          ],
-        ),
-      ],
-      width: 30,
-      direction: TextDirection.rtl,
-      backgroundColor: Colors.blueAccent,
-      animationCurve: Curves.easeIn,
-      onChanged: (value) {
-        setState(() {
-          currentIndex = value;
-        });
+    return BottomNavigationBar(
+      items: _buildBottomItems(),
+      currentIndex: _bottomNavigationIndex,
+      onTap: (idx) {
+        _bottomNavigationIndex = idx;
       },
+      selectedItemColor: Colors.red[300],
+      //fixedColor: Colors.red[300],
+      type: BottomNavigationBarType.fixed,
+      selectedFontSize: 14,
+      unselectedFontSize: 14,
     );
+  }
+
+  List<BottomNavigationBarItem> _buildBottomItems() {
+    return [
+      BottomNavigationBarItem(
+          icon: Image(
+            image: AssetImage(
+              Assets.image.home.buttomNavigate.home.path,
+            ),
+            width: 20,
+            height: 20,
+            color: Colors.grey,
+          ),
+          label: "首页"),
+      BottomNavigationBarItem(
+          icon: Image(
+            image: AssetImage(
+              Assets.image.home.buttomNavigate.dynamic.path,
+            ),
+            width: 20,
+            height: 20,
+            color: Colors.grey,
+          ),
+          label: "动态"),
+      BottomNavigationBarItem(
+        icon: Container(
+          width: 20,
+          height: 20,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: Colors.red[300]),
+          child: Center(
+            child: Icon(
+              Icons.add,
+              size: 20,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        label: "",
+      ),
+      BottomNavigationBarItem(
+          icon: Image(
+            image: AssetImage(
+              Assets.image.home.buttomNavigate.shopCar.path,
+            ),
+            width: 20,
+            height: 20,
+            color: Colors.grey,
+          ),
+          label: "会员购"),
+      BottomNavigationBarItem(
+          icon: Image(
+            image: AssetImage(
+              Assets.image.home.buttomNavigate.my.path,
+            ),
+            width: 20,
+            height: 20,
+            color: Colors.grey,
+          ),
+          label: "我的"),
+    ];
   }
 }

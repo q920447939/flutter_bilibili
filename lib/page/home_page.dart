@@ -1,8 +1,9 @@
 import 'package:badges/badges.dart' as badges;
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bilibili/http/widget/video_card.dart';
 
 import '../gen/assets.gen.dart';
+import '../http/widget/bottom_navigation_bar.dart';
 import '../http/widget/scroll_tab_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,16 +30,6 @@ class _HomePageState extends State<HomePage>
     "爱唱歌",
   ];
 
-  int _bottomNavigationIndex = 3; //底部导航页的索引，从第一页开始（比如首页）
-
-  List _bottomNameList = [
-    "首页",
-    "动态",
-    "+",
-    "会员购",
-    "我的",
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -63,21 +54,20 @@ class _HomePageState extends State<HomePage>
               children: [
                 _buildTop(),
                 _buildTabBar(),
-                _buildBigVideo(),
+                VideoCard(
+                  height: 400,
+                  videoTitle: '一个真实的案例告诉你,人无聊起来能有多坏?',
+                  playNum: 395.4,
+                  collectNum: 102,
+                  thumbUpNum: 2,
+                ),
+                _buildVideoList(),
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: _buildBottomItems(),
-        currentIndex: _bottomNavigationIndex,
-        onTap: (idx) {},
-        fixedColor: Colors.red[300],
-        type: BottomNavigationBarType.fixed,
-        selectedFontSize: 14,
-        unselectedFontSize: 14,
-      ),
+      bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
 
@@ -260,203 +250,36 @@ class _HomePageState extends State<HomePage>
         ));
   }
 
-  _buildBigVideo() {
+  final List<String> items = [
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+  ];
+  List<IconData> _icons = [];
+
+  _buildVideoList() {
     return Container(
-      height: 400,
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              Card(
-                color: Colors.black54,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                shadowColor: Colors.red,
-                elevation: 5,
-                clipBehavior: Clip.antiAlias, //裁切子组件，四周变成钝角了
-                margin: EdgeInsets.all(5),
-                child: AspectRatio(
-                  //比例 16:9
-                  aspectRatio: 16 / 9,
-                  child: Image.asset(Assets.image.home.tabBarBigVideo.path),
-                ),
-              ),
-              Positioned(
-                  left: 10,
-                  bottom: 10,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.play_arrow,
-                        size: 14,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        '359.4万',
-                        style: TextStyle(fontSize: 14, color: Colors.white),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Icon(
-                          Icons.book,
-                          size: 14,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Text(
-                        '102',
-                        style: TextStyle(fontSize: 14, color: Colors.white),
-                      ),
-                    ],
-                  )),
-              Positioned(
-                right: 10,
-                bottom: 10,
-                child: Row(
-                  children: [
-                    Image(
-                      image: AssetImage(Assets.image.home.enlarge.path),
-                      color: Colors.white,
-                      width: 20,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 10, right: 10),
-                      child: Image(
-                        image: AssetImage(Assets.image.home.barrageOpen.path),
-                        color: Colors.white,
-                        width: 25,
-                      ),
-                    ),
-                    Image(
-                      image: AssetImage(Assets.image.home.muteSound.path),
-                      color: Colors.white,
-                      width: 20,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 5),
-                child: Icon(
-                  Icons.rocket_launch,
-                  color: Colors.red,
-                  size: 20,
-                ),
-              ),
-              //double height = ScreenUtil.getInstance().screenHeight;
-              Container(
-                padding: EdgeInsets.only(left: 5),
-                width: ScreenUtil.getInstance().screenWidth * (3 / 4),
-                child: Text(
-                  "一个真实的案例告诉你,人无聊起来能有多坏?",
-                  style: TextStyle(
-                    //fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: Colors.black,
-                  ),
-                  maxLines: 2,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 4, right: 4),
-                child: SizedBox(
-                  width: 45,
-                  height: 30,
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Icon(
-                          Icons.thumb_up,
-                          color: Colors.grey,
-                          size: 25,
-                        ),
-                      ),
-                      Positioned(
-                          top: 1,
-                          right: 0,
-                          child: Text(
-                            "2万",
-                            style: TextStyle(color: Colors.grey, fontSize: 13),
-                          ))
-                    ],
-                  ),
-                ),
-              ),
-              Icon(
-                Icons.more_vert,
-                color: Colors.grey,
-                size: 20,
-              ),
-            ],
-          )
-        ],
-      ),
+      width: 200,
+      height: 100,
+      color: Colors.red,
     );
   }
 
-  List<BottomNavigationBarItem> _buildBottomItems() {
-    return [
-      BottomNavigationBarItem(
-          icon: Image(
-            image: AssetImage(
-              Assets.image.home.buttomNavigate.home.path,
-            ),
-            width: 20,
-            height: 20,
-            color: Colors.grey,
-          ),
-          label: "首页"),
-      BottomNavigationBarItem(
-          icon: Image(
-            image: AssetImage(
-              Assets.image.home.buttomNavigate.dynamic.path,
-            ),
-            width: 20,
-            height: 20,
-            color: Colors.grey,
-          ),
-          label: "动态"),
-      BottomNavigationBarItem(
-        icon: Container(
-          width: 20,
-          height: 20,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: Colors.red[300]),
-          child: Center(
-            child: Icon(
-              Icons.add,
-              size: 20,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        label: "",
-      ),
-      BottomNavigationBarItem(
-          icon: Image(
-            image: AssetImage(
-              Assets.image.home.buttomNavigate.shopCar.path,
-            ),
-            width: 20,
-            height: 20,
-            color: Colors.grey,
-          ),
-          label: "会员购"),
-      BottomNavigationBarItem(
-          icon: Image(
-            image: AssetImage(
-              Assets.image.home.buttomNavigate.my.path,
-            ),
-            width: 20,
-            height: 20,
-            color: Colors.grey,
-          ),
-          label: "我的"),
-    ];
+  //模拟异步获取数据
+  _reloadIconData() {
+    // Future 非阻塞式调用 延时200ms
+    Future.delayed(Duration(milliseconds: 200)).then((value) {
+      _icons.addAll([
+        Icons.pedal_bike,
+        Icons.ac_unit,
+        Icons.face,
+        Icons.favorite,
+        Icons.beach_access,
+        Icons.cake,
+      ]);
+      setState(() {});
+    });
   }
 }
